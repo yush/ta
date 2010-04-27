@@ -85,6 +85,19 @@ var test_swap = function () {
   ]), "swap block wasn't done right", board.get_point_matrix());
 }
 
+var test_show = function () {
+  var board = Board([
+    ["Y", null, "B", null, null],
+    ["B", "R", "Y", null, null],
+    ["Y", "R", "B", null, null]
+  ]);  
+  $('#big-view').append('<canvas id="board_test" width="838" height="220"></canvas>');
+  var board_view = BoardView();
+  board_view.set_context(document.getElementById("board_test").getContext("2d"));
+  board_view.set_board(board);
+  board_view.show();
+}
+
 var test_board = function () {
   test_transpose_matrix();
   test_line_numbers();
@@ -92,10 +105,13 @@ var test_board = function () {
   test_blocks_process_columns();
   test_falldown();
   test_swap();
+  test_show();
 };
 
 var all_test = function () {
   test_board();
 };
 
-all_test();
+$(function () {
+  all_test();
+});
